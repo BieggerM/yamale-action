@@ -16,6 +16,6 @@ ENV VIRTUAL_ENV=/app/venv \
 
 # Copy src directory to /app
 COPY /src .
-
+RUN ls
 # Entrypoint to run the app
 ENTRYPOINT ["python3", "src/lint.py"]
