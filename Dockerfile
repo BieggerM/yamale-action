@@ -18,4 +18,4 @@ ENV VIRTUAL_ENV=/app/venv \
 COPY /src .
 RUN cd /app && ls
 # Entrypoint to run the app
-ENTRYPOINT ["python3", "lint.py"]
+ENTRYPOINT ["python3", "/app/lint.py"]
