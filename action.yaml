@@ -1,0 +1,28 @@
+---
+name: 'lint yaml'
+description: 'lint a yaml'
+author: 'BieggerM'
+version: '0.0.1'
+inputs:
+  have-fun:
+    type: 'string'
+    description: 'have fun'
+    required: true
+  do-stuff:
+    type: 'string'
+    description: 'do stuff'
+    required: true
+outputs:
+  have-fun:
+    type: 'string'
+    description: 'have fun'
+    required: true
+  do-stuff:
+    type: 'string'
+    description: 'do stuff'
+    required: true
+runs:
+  using: 'docker' 
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs }}
