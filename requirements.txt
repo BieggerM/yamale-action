@@ -1,2 +1,2 @@
 yamale
-yaml-include
+pyyaml-include
