@@ -44,7 +44,7 @@ if __name__  == '__main__':
     print("Schema path: " + schema_path)
     print("Yaml directory: " + yaml_dir)
     
-    schema_object = load_yaml(schema_path)
+    schema_object = load_yaml(os.environ['GITHUB_REPOSITORY'] + schema_path)
     # print the schema object
     print("printing values of schema object:")
     print(schema_object)
