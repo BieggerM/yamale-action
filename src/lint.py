@@ -7,6 +7,7 @@
 # If the linting fails, the script will exit with a non-zero code.
 # If the linting succeeds, the script will exit with a zero code.
 
+import io
 import os
 import yamale
 import yaml
@@ -16,7 +17,7 @@ from yamlinclude import YamlIncludeConstructor
 class Loader(yaml.SafeLoader):
     """YAML Loader with `!include` constructor."""
 
-    def __init__(self, stream: IO) -> None:
+    def __init__(self, stream: io) -> None:
         """Initialise Loader."""
         try:
             self._root = os.path.split(stream.name)[0]
