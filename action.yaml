@@ -3,17 +3,15 @@ name: 'lint yaml'
 description: 'lint a yaml'
 author: 'BieggerM'
 inputs:
-  have-fun:
-    description: 'have fun'
+  dir:
+    description: 'Directory where the yaml files are located'
     required: true
-  do-stuff:
-    description: 'do stuff'
+  schema:
+    description: 'Schema against which is being validated'
     required: true
-outputs:
-  have-fun:
-    description: 'have fun'
-  do-stuff:
-    description: 'do stuff'
+  filename:
+    description: 'Filename for a specific yaml file to lint'
+    required: false
 runs:
   using: 'docker' 
   image: 'Dockerfile'

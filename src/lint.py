@@ -7,10 +7,18 @@
 # If the linting fails, the script will exit with a non-zero code.
 # If the linting succeeds, the script will exit with a zero code.
 
+import os
 import yamale
 import yaml
 
 if __name__  == '__main__':
-    # print out the environment variables
-    print('\n'.join(['{}={}'.format(k, v) for k, v in sorted(os.environ.items())]))
+    # get the schema path from the environment variable
+    schema_path = os.environ['INPUT_SCHEMA']
+    # get the directory of the yaml files from the environment variable
+    yaml_dir = os.environ['INPUT_DIR']
+
+    # print both variables
+    print("Schema path: " + schema_path)
+    print("Yaml directory: " + yaml_dir)
+    
     
