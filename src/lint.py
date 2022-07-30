@@ -10,6 +10,28 @@
 import os
 import yamale
 import yaml
+from yamlinclude import YamlIncludeConstructor
+
+# create Loader Class for loading data
+class Loader(yaml.SafeLoader):
+    """YAML Loader with `!include` constructor."""
+
+    def __init__(self, stream: IO) -> None:
+        """Initialise Loader."""
+        try:
+            self._root = os.path.split(stream.name)[0]
+        except AttributeError:
+            self._root = os.path.curdir
+        super().__init__(stream)
+
+
+def load_yaml(location):
+    YamlIncludeConstructor.add_to_loader_class(loader_class=yaml.FullLoader, base_dir='yaml_files')
+    script_dir = os.path.dirname(__file__)
+    abs_file_path = os.path.join(script_dir, location)
+    with open(abs_file_path) as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
+
 
 if __name__  == '__main__':
     # get the schema path from the environment variable
@@ -20,5 +42,11 @@ if __name__  == '__main__':
     # print both variables
     print("Schema path: " + schema_path)
     print("Yaml directory: " + yaml_dir)
+    
+    schema_object = load_yaml(schema_path)
+    # print the schema object
+    print("printing values of schema object:")
+    print(schema_object)
+
     
     
