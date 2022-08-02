@@ -3,7 +3,7 @@
 # If the schema is not given, it will use the default one.
 # The schema can be given as a path or as a string.
 # The yaml to lint can be given as a path or as a string.
-# There can be muliple yaml files to lint.
+# There can be multiple yaml files to lint.
 # If the linting fails, the script will exit with a non-zero code.
 # If the linting succeeds, the script will exit with a zero code.
 
@@ -47,13 +47,7 @@ if __name__ == '__main__':
         # add hint to include subdir to filename
         filename = '**/' + filename
 
-    # print all defined variables
-    print('schema_path: ' + schema_path)
-    print('base_dir: ' + base_dir)
-    print('filename: ' + filename)
-    print('include_subdir: ' + include_subdir)
-
-    # if subdirs are not included, the base_dir is the directory of the yaml files
+    # if sub-dirs are not included, the base_dir is the directory of the yaml files
     # we look for the yaml files in the base_dir that end with the filename
     lint_valid = True
     for path in Path(base_dir).glob(filename):
@@ -65,6 +59,7 @@ if __name__ == '__main__':
             logging.error(e)
             lint_valid = False
     if lint_valid:
+        logging.info("Linting succeeded")
         exit(0)
     else:
         exit(1)
