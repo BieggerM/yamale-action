@@ -32,13 +32,13 @@ if __name__ == '__main__':
     # check if environment variable is set
     # if not set, use the default filename '*.yaml'
     # that means every yaml file in the current directory will be linted
-    if 'INPUT_FILENAME' in os.environ:
+    if 'INPUT_FILENAME' is not None:
         filename = os.environ['INPUT_FILENAME']
     else:
         filename = '*.yaml'
 
     # same for include subdir variable
-    if 'INPUT_INCLUDE_SUBDIR' in os.environ:
+    if 'INPUT_INCLUDE_SUBDIR' is not None:
         include_subdir = os.environ['INPUT_INCLUDE_SUBDIR']
     else:
         include_subdir = 'false'
