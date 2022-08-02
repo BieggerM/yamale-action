@@ -47,6 +47,12 @@ if __name__ == '__main__':
         # add hint to include subdir to filename
         filename = '**/' + filename
 
+    # print all defined variables
+    print('schema_path: ' + schema_path)
+    print('base_dir: ' + base_dir)
+    print('filename: ' + filename)
+    print('include_subdir: ' + include_subdir)
+
     # if subdirs are not included, the base_dir is the directory of the yaml files
     # we look for the yaml files in the base_dir that end with the filename
     lint_valid = True
