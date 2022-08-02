@@ -24,10 +24,10 @@ def load_yaml(location):
 
 if __name__ == '__main__':
     # get the schema path from the environment variable
-    schema_path = os.environ['INPUT_SCHEMA']
+    schema_path = os.path.join(os.environ['GITHUB_WORKSPACE'], os.environ['INPUT_SCHEMA'])
 
     # get the directory of the yaml files from the environment variable
-    base_dir = os.environ['INPUT_BASE_DIR']
+    base_dir = os.path.join(os.environ['GITHUB_WORKSPACE'], os.environ['INPUT_BASE_DIR'])
 
     # check if environment variable is set
     # if not set, use the default filename '*.yaml'
