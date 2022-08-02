@@ -7,47 +7,58 @@
 # If the linting fails, the script will exit with a non-zero code.
 # If the linting succeeds, the script will exit with a zero code.
 
-import io
 import os
-import yamale
+from pathlib import Path
+import logging
 import yaml
-from yamlinclude import YamlIncludeConstructor
-
-# create Loader Class for loading data
-class Loader(yaml.SafeLoader):
-    """YAML Loader with `!include` constructor."""
-
-    def __init__(self, stream: io) -> None:
-        """Initialise Loader."""
-        try:
-            self._root = os.path.split(stream.name)[0]
-        except AttributeError:
-            self._root = os.path.curdir
-        super().__init__(stream)
+import glob
+import yamale
 
 
 def load_yaml(location):
-    YamlIncludeConstructor.add_to_loader_class(loader_class=yaml.FullLoader, base_dir='yaml_files')
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, location)
     with open(abs_file_path) as f:
         return yaml.load(f, Loader=yaml.FullLoader)
 
 
-if __name__  == '__main__':
+if __name__ == '__main__':
     # get the schema path from the environment variable
     schema_path = os.environ['INPUT_SCHEMA']
+
     # get the directory of the yaml files from the environment variable
-    yaml_dir = os.environ['INPUT_DIR']
+    base_dir = os.environ['INPUT_BASE_DIR']
 
-    # print both variables
-    print("Schema path: " + schema_path)
-    print("Yaml directory: " + yaml_dir)
-    
-    schema_object = load_yaml(os.environ['GITHUB_REPOSITORY'] + schema_path)
-    # print the schema object
-    print("printing values of schema object:")
-    print(schema_object)
+    # check if environment variable is set
+    # if not set, use the default filename '*.yaml'
+    # that means every yaml file in the current directory will be linted
+    if 'INPUT_FILENAME' in os.environ:
+        filename = os.environ['INPUT_FILENAME']
+    else:
+        filename = '*.yaml'
 
-    
-    
+    # same for include subdir variable
+    if 'INPUT_INCLUDE_SUBDIR' in os.environ:
+        include_subdir = os.environ['INPUT_INCLUDE_SUBDIR']
+    else:
+        include_subdir = 'false'
+
+    if include_subdir == 'true':
+        # add hint to include subdir to filename
+        filename = '**/' + filename
+
+    # if subdirs are not included, the base_dir is the directory of the yaml files
+    # we look for the yaml files in the base_dir that end with the filename
+    lint_valid = True
+    for path in Path(base_dir).glob(filename):
+        # now we can lint the yaml file
+        # if the linting fails, the script will exit with a non-zero code
+        try:
+            yamale.validate(yamale.make_schema(schema_path), yamale.make_data(path))
+        except yamale.YamaleError as e:
+            logging.error(e)
+            lint_valid = False
+    if lint_valid:
+        exit(0)
+    else:
+        exit(1)

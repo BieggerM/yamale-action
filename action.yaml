@@ -3,14 +3,17 @@ name: 'lint yaml'
 description: 'lint a yaml'
 author: 'BieggerM'
 inputs:
-  dir:
+  base_dir:
     description: 'Directory where the yaml files are located'
     required: true
   schema:
     description: 'Schema against which is being validated'
     required: true
   filename:
-    description: 'Filename for a specific yaml file to lint'
+    description: 'Filename ending for a specific yaml file to lint'
+    required: false
+  include_subdir:
+    description: 'Set true if subdirectories of the dir also need to be linted'
     required: false
 runs:
   using: 'docker' 

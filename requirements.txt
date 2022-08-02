@@ -1,2 +1,2 @@
-yamale
-pyyaml-include
+yamale~=4.0.4
+PyYAML~=6.0
