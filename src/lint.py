@@ -31,10 +31,11 @@ if __name__ == '__main__':
 
     files = glob.glob(os.path.join(base_dir, filename), recursive=True)
 
-    results = []
+    results = {file: [] for file in files}
     for schema_path in schema_paths:
         schema = yamale.make_schema(os.path.join(os.environ['GITHUB_WORKSPACE'], schema_path.strip()))
-        results.extend([lint_file(schema, file) for file in files])
+        for file in files:
+            results[file].append(lint_file(schema, file))
 
-    if any(result is False for result in results):
-        sys.exit(1)
+    if any(all(result == False for result in results[file]) for file in files):
+        exit(1)
