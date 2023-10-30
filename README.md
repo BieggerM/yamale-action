@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v2
         name: checkout
       # Runs the linter
-      - uses: bieggerm/yamllint@v1.53
+      - uses: bieggerm/yamale-action@v1
         name: lint-yaml
         with:
           base_dir: "path/to/yaml/"
