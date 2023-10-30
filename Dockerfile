@@ -1,5 +1,5 @@
 # Dockerfile based on alpine/3.6
-FROM alpine:3.6
+FROM alpine:3.18
 
 # Install python3
 RUN apk add --no-cache bash python3 py3-pip \
