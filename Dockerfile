@@ -1,25 +1,25 @@
-# Dockerfile based on alpine/3.6
-FROM alpine:3.6
+# Dockerfile based on python:3.9-slim-buster
+FROM python:3.9-slim-buster
 
-# Install python3
-RUN apk add --no-cache bash python3 py3-pip \
-  && mkdir -p /app \
-  && addgroup -g 10000 app \
-  && adduser  -s /bin/bash -G app -u 10000 -h /app -k /dev/null -D app \
-  && python3 -m venv /app/venv \
-  && chown -R app:app /app
-
-# Define Workdir as /app
+# Create app directory
 WORKDIR /app
-ENV VIRTUAL_ENV=/app/venv \
-    PATH=/app/venv/bin:$PATH
+
+# Create a group and user
+RUN addgroup --system app && adduser --system --group app
+
+# Ensure that Python outputs everything that's printed inside
+# the application rather than buffering it.
+ENV PYTHONUNBUFFERED=1
+
+# Copy requirements.txt and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy src directory to /app
 COPY /src .
 
-# Install python dependencies
-COPY requirements.txt /app/requirements.txt
-RUN pip3 install -r requirements.txt
+# Change to non-root user
+USER app
 
 # Entrypoint to run the app
 ENTRYPOINT ["python3", "/app/lint.py"]

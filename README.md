@@ -45,11 +45,14 @@ jobs:
           include_subdir: true  
           filename: "*matching.yaml"
 ```
+## Changes
+
+It is now possible to validate using multiple schemas. Every file gets linted against every schema. If all schemas see a files syntax as invalid, the script fails. If one schema sees the syntax as valid, it passes.
+
 
 ## Upcoming Features
-- [ ] Add support for multiple schemas in an either or way.
+- [x] Add support for multiple schemas in an either or way.
 - [ ] Create an Output for other actions to depend on.
-- [ ] Enable the option to describe the results in a comment on the PR.
 
 
 ## Contributing :nerd_face:
