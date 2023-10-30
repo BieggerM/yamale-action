@@ -47,8 +47,17 @@ jobs:
 ```
 ## Changes
 
-It is now possible to validate using multiple schemas. Every file gets linted against every schema. If all schemas see a files syntax as invalid, the script fails. If one schema sees the syntax as valid, it passes.
-
+It is now possible to validate using multiple schemas. Every file gets linted against every schema. If all schemas see a files syntax as invalid, the script fails. If one schema sees the syntax as valid, it passes. 
+Multiple schemas can be used as by seperating them with a comma:
+```yaml
+- uses: bieggerm/yamale-action@v1
+        name: lint-yaml
+        with:
+          base_dir: "path/to/yaml/"
+          schema: ".lint/schema.yaml,.lint/schema2" 
+          include_subdir: true  
+          filename: "*matching.yaml"
+```
 
 ## Upcoming Features
 - [x] Add support for multiple schemas in an either or way.
