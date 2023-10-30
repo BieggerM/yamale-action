@@ -1,4 +1,4 @@
-# Dockerfile based on alpine/3.6
+# Dockerfile based on python:3.9-slim-buster
 FROM python:3.9-slim-buster
 
 # Create app directory
