@@ -36,5 +36,5 @@ if __name__ == '__main__':
         schema = yamale.make_schema(os.path.join(os.environ['GITHUB_WORKSPACE'], schema_path.strip()))
         results.extend([lint_file(schema, file) for file in files])
 
-    if all(result is False for result in results):
+    if any(result is False for result in results):
         sys.exit(1)
