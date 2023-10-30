@@ -21,7 +21,7 @@ def lint_file(schema, filename):
         return False
 
 if __name__ == '__main__':
-    schema_paths = os.environ['INPUT_SCHEMAS'].split(',')
+    schema_paths = os.environ['INPUT_SCHEMA'].split(',')
     base_dir = os.path.join(os.environ['GITHUB_WORKSPACE'], os.environ['INPUT_BASE_DIR'])
     filename = os.environ['INPUT_FILENAME'] if os.environ['INPUT_FILENAME'] else '*.yaml'
     include_subdir = os.environ['INPUT_INCLUDE_SUBDIR'] if os.environ['INPUT_INCLUDE_SUBDIR'] else 'false'
