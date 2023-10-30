@@ -54,7 +54,7 @@ Multiple schemas can be used as by seperating them with a comma:
         name: lint-yaml
         with:
           base_dir: "path/to/yaml/"
-          schema: ".lint/schema.yaml,.lint/schema2" 
+          schema: ".lint/schema.yaml,.lint/schema2.yaml" 
           include_subdir: true  
           filename: "*matching.yaml"
 ```
