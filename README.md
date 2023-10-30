@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v2
         name: checkout
       # Runs the linter
-      - uses: bieggerm/yamale-action@v1
+      - uses: bieggerm/yamale-action@v2
         name: lint-yaml
         with:
           base_dir: "path/to/yaml/"
@@ -50,7 +50,7 @@ jobs:
 It is now possible to validate using multiple schemas. Every file gets linted against every schema. If all schemas see a files syntax as invalid, the script fails. If one schema sees the syntax as valid, it passes. 
 Multiple schemas can be used as by seperating them with a comma:
 ```yaml
-- uses: bieggerm/yamale-action@v1
+- uses: bieggerm/yamale-action@v2
         name: lint-yaml
         with:
           base_dir: "path/to/yaml/"
