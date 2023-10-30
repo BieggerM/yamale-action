@@ -14,6 +14,7 @@ COPY /src .
 # Install python dependencies
 COPY requirements.txt .
 RUN pip install --user -r requirements.txt
+RUN pip install --user PyYAML
 
 # Entrypoint to run the app
 ENTRYPOINT ["python3", "/app/lint.py"]
